@@ -12,9 +12,9 @@ namespace Calculator
         {
             Console.WriteLine("Hello user");
 
-            float operand1;
+            float operand1 = 0;
 
-            float? operand2;
+            float operand2 = 0;
 
             OperationType operationType = OperationType.None;
 
@@ -56,10 +56,18 @@ namespace Calculator
                         history += operand1.ToString() + " ";
 
                         Console.WriteLine("Enter operation type ");
+
+                        operand1 = Int32.Parse(usersInput);
+
+                      
+
                     }
+
+                 
 
                 } else if (expectedInput == ExpectedInput.Operation)
                 {
+
                   
 
                     if (usersInput.Trim() == "+")
@@ -120,6 +128,20 @@ namespace Calculator
                     if (!float.TryParse(usersInput, out operand2))
                     {
 
+                        Console.WriteLine("Entered number is not valid");
+
+                        
+
+                    }
+                    else
+                    {
+                        expectedInput = ExpectedInput.Result;
+
+                        history += operand2.ToString() + " ";
+
+                        operand2 = Int32.Parse(usersInput);
+
+                        Console.WriteLine(operand2 + operand1);
                     }
 
 
