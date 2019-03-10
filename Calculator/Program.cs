@@ -1,140 +1,103 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Calculator.Logic;
 
-namespace Calculator
+namespace Calculator.Console
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello user");
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			System.Console.WriteLine("Hello user");
 
-            //Calculator calculator = new Calculator();
+			var calculator = new Logic.Calculator();
 
-            ExpectedInput expectedInput = ExpectedInput.Operant;
+			ExpectedInput expectedInput = ExpectedInput.Operant;
 
-            string[] operationSymbols = { "+", "-", "*", "/" };
+			string[] operationSymbols = {"+", "-", "*", "/"};
 
-            float result = 0;
-
-
-
-            PrintMenu();
+			PrintMenu();
 
 
-            while (true)
-            {
-               
+			while (true)
+			{
+				string usersInput = System.Console.ReadLine();
 
-                string usersInput = Console.ReadLine();
+				if (string.Compare(usersInput, "Q", true, CultureInfo.InvariantCulture) == 0)
+				{
+					System.Console.WriteLine("Goodbye!");
 
-                if (string.Compare( usersInput, "Q", true) == 0)
-                {
-                    Console.WriteLine("Goodbye!");
+					break;
+				}
 
-                    break;
-                }
+				if (expectedInput == ExpectedInput.Operant)
+				{
+					if (!float.TryParse(usersInput, out float operand1))
+					{
+						System.Console.WriteLine("Entered number is not valid.  Please enter valid number");
 
-                if (expectedInput == ExpectedInput.Operant)
-                {
+						System.Console.WriteLine("Press Q to exit");
+					}
+					else
+					{
+						expectedInput = ExpectedInput.Operation;
 
-                    if (!float.TryParse(usersInput, out operand1))
-                    {
+						calculator.Operand1 = operand1;
 
-                        Console.WriteLine("Entered number is not valid");
+						System.Console.WriteLine("Enter operation type ");
+					}
+				}
+				else if (expectedInput == ExpectedInput.Operation)
+				{
+					string userInputTrimmed = usersInput.Trim();
 
-                        Console.WriteLine("Press Q to exit");
+					if (operationSymbols.Contains(userInputTrimmed))
+					{
+						int index = operationSymbols.ToList().IndexOf(userInputTrimmed);
 
-                    }
-                    else
-                    {
-                        expectedInput = ExpectedInput.Operation;
-
-                        calculator.Operand1 = operand1;
-
-                        Console.WriteLine("Enter operation type ");
-
-                    }
-
-                 
-
-                } else if (expectedInput == ExpectedInput.Operation)
-                {
-
-                    string userInputTrimmed = usersInput.Trim();
-
-                    if (operationSymbols.Contains(userInputTrimmed))
-                    {
-
-                        //operationType = Enum.Parse(typeof(OperationType), )
-
-                        int index = operationSymbols.ToList().IndexOf(userInputTrimmed);
-
-                        operationType = (OperationType)(index + 1);
-
-                        calculator.operationType = operationType;
+						calculator.OperationType = (OperationType) (index + 1);
 
 
-                        expectedInput = ExpectedInput.Operant2;
-
-                    
-
-                        Console.WriteLine("Enter second operant ");
-
-                    }  else
-                    {
-                        Console.WriteLine("Entered operation type is not valid");
-                        Console.WriteLine("Press Q to exit");
-                    }
-
-                    // TODO: По аналогии распарсить что введт поль, если плюс, то продолжить, если не плюс то вывести сообщение об ошибки и добиться чтобы в вел нормальный знак
-                    // TODO: Второе число после того как польщователь ввел плюс или минус 
-                    // TODO: Чтобы ввыводился результат и хистори, где все это сохраняется
-
-                } else if (expectedInput == ExpectedInput.Operant2)
-                {
-
-                    if (!float.TryParse(usersInput, out operand2))
-                    {
-
-                        Console.WriteLine("Entered number is not valid");
-
-                        
-
-                    }
-                    else
-                    {
-                        expectedInput = ExpectedInput.Result;
-
-                        calculator.Operand2 = operand2;
-
-                        calculator.PerfomeAction();
-                    }
+						expectedInput = ExpectedInput.Operant2;
 
 
-                }  else if (expectedInput == ExpectedInput.Result)
-                {
-                   
+						System.Console.WriteLine("Enter second operant ");
+					}
+					else
+					{
+						System.Console.WriteLine("Entered operation type is not valid. Please enter valid operation");
+						System.Console.WriteLine("Press Q to exit");
+					}
+				}
+				else if (expectedInput == ExpectedInput.Operant2)
+				{
+					if (!float.TryParse(usersInput, out float operand2))
+					{
+						System.Console.WriteLine("Entered number is not valid. Please enter valid number");
+					}
+					else
+					{
+						expectedInput = ExpectedInput.Result;
+
+						calculator.Operand2 = operand2;
+
+						float result = calculator.PerfomeAction();
+
+						System.Console.WriteLine($"Result is: {result}");
+					}
+				}
+				else if (expectedInput == ExpectedInput.Result)
+				{
+				}
 
 
-                }
+			}
+		}
 
-
-
-
-                 //   Console.WriteLine("This is history: " + history);
-            }
-
-
-        }
-
-        static void PrintMenu()
-        {
-            Console.WriteLine("Please, enter the first number");
-            Console.WriteLine("Press Q to exit");
-        }
-    }
+		static void PrintMenu()
+		{
+			System.Console.WriteLine("Please, enter the first number");
+			System.Console.WriteLine("Press Q to exit");
+		}
+	}
 }
