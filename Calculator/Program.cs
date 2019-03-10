@@ -12,15 +12,15 @@ namespace Calculator
         {
             Console.WriteLine("Hello user");
 
-            float operand1 = 0;
-
-            float operand2 = 0;
-
-            OperationType operationType = OperationType.None;
+            //Calculator calculator = new Calculator();
 
             ExpectedInput expectedInput = ExpectedInput.Operant;
 
-            string history = string.Empty;
+            string[] operationSymbols = { "+", "-", "*", "/" };
+
+            float result = 0;
+
+
 
             PrintMenu();
 
@@ -52,14 +52,10 @@ namespace Calculator
                     else
                     {
                         expectedInput = ExpectedInput.Operation;
-                        
-                        history += operand1.ToString() + " ";
+
+                        calculator.Operand1 = operand1;
 
                         Console.WriteLine("Enter operation type ");
-
-                        operand1 = Int32.Parse(usersInput);
-
-                      
 
                     }
 
@@ -68,51 +64,27 @@ namespace Calculator
                 } else if (expectedInput == ExpectedInput.Operation)
                 {
 
-                  
+                    string userInputTrimmed = usersInput.Trim();
 
-                    if (usersInput.Trim() == "+")
+                    if (operationSymbols.Contains(userInputTrimmed))
                     {
-                        history += usersInput.ToString() + " ";
+
+                        //operationType = Enum.Parse(typeof(OperationType), )
+
+                        int index = operationSymbols.ToList().IndexOf(userInputTrimmed);
+
+                        operationType = (OperationType)(index + 1);
+
+                        calculator.operationType = operationType;
+
 
                         expectedInput = ExpectedInput.Operant2;
 
-                        operationType = OperationType.Sum;
+                    
 
                         Console.WriteLine("Enter second operant ");
 
-                    } else if (usersInput.Trim() == "-")
-                    {
-
-                        history += usersInput.ToString() + " ";
-
-                        expectedInput = ExpectedInput.Operant2;
-
-                        operationType = OperationType.Diff;
-
-                        Console.WriteLine("Enter second operant ");
-
-
-                    } else if (usersInput.Trim() == "*")
-                    {
-                        history += usersInput.ToString() + " ";
-
-                        expectedInput = ExpectedInput.Operant2;
-
-                        operationType = OperationType.Prod;
-
-                        Console.WriteLine("Enter second operant ");
-
-                    } else if (usersInput.Trim() == "/")
-                    {
-                        history += usersInput.ToString() + " ";
-
-                        expectedInput = ExpectedInput.Operant2;
-
-                        operationType = OperationType.Div;
-
-                        Console.WriteLine("Enter second operant ");
-
-                    } else
+                    }  else
                     {
                         Console.WriteLine("Entered operation type is not valid");
                         Console.WriteLine("Press Q to exit");
@@ -137,12 +109,15 @@ namespace Calculator
                     {
                         expectedInput = ExpectedInput.Result;
 
-                        history += operand2.ToString() + " ";
+                        calculator.Operand2 = operand2;
 
-                        operand2 = Int32.Parse(usersInput);
-
-                        Console.WriteLine(operand2 + operand1);
+                        calculator.PerfomeAction();
                     }
+
+
+                }  else if (expectedInput == ExpectedInput.Result)
+                {
+                   
 
 
                 }
@@ -160,9 +135,6 @@ namespace Calculator
         {
             Console.WriteLine("Please, enter the first number");
             Console.WriteLine("Press Q to exit");
-         
-
-
         }
     }
 }
