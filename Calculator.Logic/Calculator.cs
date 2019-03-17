@@ -9,6 +9,8 @@ namespace Calculator.Logic
 
 		float _operand2 = 0;
 
+        float _result = 0;
+
 		readonly StringBuilder _stringBuilder = new StringBuilder();
 
 		OperationType _operationType = OperationType.None;
@@ -19,9 +21,18 @@ namespace Calculator.Logic
 			set
 			{
 				_operand1 = value;
-				_stringBuilder.Append(_operand1);
+                _stringBuilder.Append(" " + _operand1);
 			}
 		}
+
+        public float Result
+        {
+            get => _result;
+            set
+            {
+                _result = value;
+            }
+        }
 
 		public float Operand2
 		{
@@ -39,7 +50,21 @@ namespace Calculator.Logic
 			set
 			{
 				_operationType = value;
-				_stringBuilder.Append(_operationType);
+                if (_operationType == OperationType.Sum)
+                {
+                    _stringBuilder.Append("+");
+                } else if (_operationType == OperationType.Diff)
+                {
+                    _stringBuilder.Append("-");
+                } else if (_operationType == OperationType.Prod)
+                {
+                    _stringBuilder.Append("*");
+                } else if (_operationType == OperationType.Div)
+                {
+                    _stringBuilder.Append("/");
+                }
+                   
+				
 			}
 		}
 

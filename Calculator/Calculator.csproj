@@ -56,6 +56,10 @@
       <Project>{91725818-a10a-45df-8535-189cec72055a}</Project>
       <Name>Calculator.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CalculatorWPF\CalculatorWPF.csproj">
+      <Project>{1e6b9ab8-9922-43d2-96b5-bb7f947575ec}</Project>
+      <Name>CalculatorWPF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

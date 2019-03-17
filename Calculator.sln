@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{3C1EE8DC-B8EA-407A-B550-63BDF29571B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Logic", "Calculator.Logic\Calculator.Logic.csproj", "{91725818-A10A-45DF-8535-189CEC72055A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Logic", "Calculator.Logic\Calculator.Logic.csproj", "{91725818-A10A-45DF-8535-189CEC72055A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorWPF", "CalculatorWPF\CalculatorWPF.csproj", "{1E6B9AB8-9922-43D2-96B5-BB7F947575EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{91725818-A10A-45DF-8535-189CEC72055A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91725818-A10A-45DF-8535-189CEC72055A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91725818-A10A-45DF-8535-189CEC72055A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E6B9AB8-9922-43D2-96B5-BB7F947575EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E6B9AB8-9922-43D2-96B5-BB7F947575EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E6B9AB8-9922-43D2-96B5-BB7F947575EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E6B9AB8-9922-43D2-96B5-BB7F947575EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
